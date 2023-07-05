@@ -22,11 +22,12 @@ const elements = [];
 
 function addElement({ name, url }) {
     const li = document.createElement('li');
-    const trash =document.createElement('span')
+    const trash = document.createElement('span')
     const a = document.createElement('a')
     a.href = url
     a.target = "_blank"
-    li.innerHTML = `${name}`;
+    a.innerHTML = `${name}`;
+    li.append(a)
     elements.push(li);
     const respostas = document.getElementById('respostas');
     respostas.innerHTML = '';
@@ -44,21 +45,9 @@ function addElement({ name, url }) {
 }
 
 function removeElement(element) {
-    document.querySelector('#apagar')
-    apg.addEventListener('click', function(e){
-        e.preventDefault();
-        const respostas = document.getElementById('respostas');
-        const delet = document.getElementById('delete')
-        if (!delet) {
-            elements.remove(delet)
-        }
-        respostas.innerHTML = '';
-        elements.length = 0;
-    })
-
-
-}
-
+    if (confirm('Tem certeza que deseja deletar?'))
+        element.parentNode.remove()
+    }
 
 
 form.addEventListener('submit', (event) => {
