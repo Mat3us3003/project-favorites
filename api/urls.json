@@ -1,20 +1,12 @@
 {
   "urls": [
     {
-      "name": "teste",
-      "url": "http://google.com.br"
+      "name": "Meu Git",
+      "url": "https://github.com/Ale-Lira"
     },
     {
-      "name": "teste",
-      "url": "http://google.com.br"
-    },
-    {
-      "name": "youtube",
-      "url": "http://youtube.com.br"
-    },
-    {
-      "name": "youtube",
-      "url": "http://youtube.com.br"
+      "name": "Google",
+      "url": "https://google.com"
     }
   ]
 }

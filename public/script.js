@@ -2,10 +2,6 @@ const ul = document.querySelector('ul')
 const input = document.querySelector('input')
 const form = document.querySelector('form')
 
-/*
-
-// Não se preocupem com esse pedaço de código comentado! Vamos descomentá-lo quando tivermos acabado de construir a API.
-
 // Função que carrega o conteúdo da API.
 async function load() {
     // fetch está como await para evitar que entre num esquema de promisse e só devolva o conteúdo após a iteração qua acontece em seguida.
@@ -16,7 +12,7 @@ async function load() {
 }
 
 load()
-*/
+
 
 const elements = [];
 
@@ -41,12 +37,16 @@ function addElement({ name, url }) {
     })
     li.append(a)
     li.append(trash)
-
+    res = fetch(`http://localhost:3000/?name=${name}url=${url}`)
+    
 }
 
+
+
 function removeElement(element) {
-    if (confirm('Tem certeza que deseja deletar?'))
+    if (confirm('Já decorou o link?'))
         element.parentNode.remove()
+        res = fetch(`http://localhost:3000/?name=${element.name}url=${element.url}&del=1`)
     }
 
 

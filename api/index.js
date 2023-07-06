@@ -5,12 +5,21 @@ const fs = require('fs')
 const path = require('path')
 
 http.createServer((req, res) => {
+    
     const { name, url, del } = URL.parse(req.url, true).query
+
+    res.writeHead(200, {
+        'Access-Control-Allow-Origin': '*'
+    })
+
     data.urls = data.urls.filter(item => item.url != url)
+
     if (!name || !url)
         return res.end(JSON.stringify(data))
+
     if (del)
         return writeFile(message => res.end(message))
+    
     data.urls.push({ name, url })
     return writeFile(message => res.end(message))
     function writeFile(cb) {
@@ -19,7 +28,7 @@ http.createServer((req, res) => {
             JSON.stringify(data, null, 2),
             err => {
                 if (err) throw err
-                cb('Operação realizada com sucesso!')
+                cb('Operacao realizada com sucesso!')
             }
         )
     }
