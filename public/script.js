@@ -16,6 +16,7 @@ load()
 
 const elements = [];
 
+
 function addElement({ name, url }) {
     const li = document.createElement('li');
     const trash = document.createElement('span')
@@ -30,23 +31,27 @@ function addElement({ name, url }) {
     trash.innerHTML= "x"
     trash.onclick= () => removeElement(trash)
 
-
     elements.forEach((element) => {
         respostas.appendChild(element);
-
     })
     li.append(a)
     li.append(trash)
-    res = fetch(`http://localhost:3000/?name=${name}url=${url}`)
-    
 }
 
+async function addElementAndSendToApi({ name, url }){
 
+    addElement({ name, url })
+
+    const respostas = await fetch(`http://localhost:3000/?name=${name}&url=${url}`)
+
+    if (!respostas.ok)
+        console.error('Erro ao enviar a API')
+}
 
 function removeElement(element) {
     if (confirm('Já decorou o link?'))
         element.parentNode.remove()
-        res = fetch(`http://localhost:3000/?name=${element.name}url=${element.url}&del=1`)
+        
     }
 
 
@@ -67,8 +72,8 @@ form.addEventListener('submit', (event) => {
     if (!/^http/.test(url))
         return alert('Digite a url da maneira correta.')
 
-    addElement({ name, url })
 
+    addElementAndSendToApi({ name, url })
     input.value = ''
 
 })
