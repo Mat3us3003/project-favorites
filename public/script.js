@@ -21,15 +21,19 @@ function addElement({ name, url }) {
     const li = document.createElement('li');
     const trash = document.createElement('span')
     const a = document.createElement('a')
+
     a.href = url
     a.target = "_blank"
     a.innerHTML = `${name}`;
+
     li.append(a)
     elements.push(li);
+
     const respostas = document.getElementById('respostas');
     respostas.innerHTML = '';
+
     trash.innerHTML= "x"
-    trash.onclick= () => removeElement(trash)
+    trash.onclick= () => removeElement(trash, { name, url })
 
     elements.forEach((element) => {
         respostas.appendChild(element);
@@ -48,10 +52,14 @@ async function addElementAndSendToApi({ name, url }){
         console.error('Erro ao enviar a API')
 }
 
-function removeElement(element) {
+async function removeElement(element, { name, url }) {
     if (confirm('Já decorou o link?'))
         element.parentNode.remove()
         
+        const respostas = await fetch(`http://localhost:3000/?name=${name}&url=${url}&del=1`)
+        if(!respostas.ok){
+            console.log(error)
+        }
     }
 
 
